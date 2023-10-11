@@ -1,0 +1,41 @@
+﻿@inherits LayoutComponentBase
+
+<pagetitle>RiderRazorBug</pagetitle>
+
+<div class="page">
+    <div class="sidebar">
+        <navmenu/>
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+            <CustomInput @bind-Value:get=@_inputNumber @bind-Value:set=@SetInputNumber></CustomInput>
+            <CustomInput @bind-Value=@InputNumber></CustomInput>
+            <hr />
+            <hr />
+            <hr />
+            <CustomInputWithBindSet @bind-Value=@InputText></CustomInputWithBindSet>
+        </article>
+    </main>
+</div>
+
+@code {
+    private string InputText { get; set; } = "";
+    private decimal _inputNumber = 0m;
+    
+    private void SetInputNumber(decimal value)
+    {
+        _inputNumber = value;
+    }
+
+    private decimal InputNumber
+    {
+        get => _inputNumber;
+        set => _inputNumber = value;
+    }
+}

@@ -1,0 +1,25 @@
+﻿@using System.Numerics;
+
+@inherits InputBase<TValue>
+
+@typeparam TValue where TValue : INumber<TValue>
+
+<input @bind=@CurrentValueAsString />
+
+@code {
+    protected override bool TryParseValueFromString(string? value, out TValue? result, out string? validationErrorMessage)
+    {
+        result = TValue.Zero;
+        validationErrorMessage = null;
+        if (value is null)
+        {
+            return false;
+        }
+        if (TValue.TryParse(value, null, out var asDecimal))
+        {
+            result = asDecimal;
+            return true;
+        }
+        return false;
+    }
+}
